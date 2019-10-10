@@ -1,5 +1,5 @@
 import { Children, Component, ReactNode, createElement } from "react";
-import { Text, View, TouchableOpacity, Platform } from "react-native";
+import { Text, View, TouchableOpacity, Platform, TouchableNativeFeedback } from "react-native";
 
 import { CustomStyle } from "../GroupBox";
 import { flattenStyles } from "../utils/common";
@@ -47,7 +47,7 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
     private readonly styles = flattenStyles(defaultStyle, this.props.style);
 
     readonly state: GroupBoxState = {
-        collapsed: this.props.startCollapsed ? this.props.startCollapsed : false
+        collapsed: !!this.props.startCollapsed
     };
 
     render(): ReactNode {
@@ -77,7 +77,11 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
         );
 
         if (collapsible) {
-            return <TouchableOpacity onPress={this.toggleCollapsed}>{view}</TouchableOpacity>;
+            return Platform.OS === "ios" ? (
+                <TouchableOpacity onPress={this.toggleCollapsed}>{view}</TouchableOpacity>
+            ) : (
+                <TouchableNativeFeedback onPress={this.toggleCollapsed}>{view}</TouchableNativeFeedback>
+            );
         } else if (headerCaption) {
             return view;
         }
