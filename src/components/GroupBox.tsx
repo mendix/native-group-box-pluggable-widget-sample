@@ -1,4 +1,4 @@
-import { Children, Component, ReactNode, createElement } from "react";
+import { Children, Component, ReactNode, createElement, ComponentClass } from "react";
 import { Text, View, TouchableOpacity, Platform, TouchableNativeFeedback } from "react-native";
 
 import { CustomStyle } from "../GroupBox";
@@ -76,12 +76,10 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
             </View>
         );
 
+        const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
+
         if (collapsible) {
-            return Platform.OS === "ios" ? (
-                <TouchableOpacity onPress={this.toggleCollapsed}>{view}</TouchableOpacity>
-            ) : (
-                <TouchableNativeFeedback onPress={this.toggleCollapsed}>{view}</TouchableNativeFeedback>
-            );
+            return <Touchable onPress={this.toggleCollapsed}>{view}</Touchable>;
         } else if (headerCaption) {
             return view;
         }
