@@ -1,20 +1,19 @@
-dist/*
-!dist/MxTestProject/
+dist/
 node_modules/
 *.log
 
-dist/MxTestProject/*
-!dist/MxTestProject/*.mpr
-!dist/MxTestProject/widgets/
-!dist/MxTestProject/theme/
+test/MxTestProject/*
+!test/MxTestProject/*.mpr
+!test/MxTestProject/widgets/
+!test/MxTestProject/theme/
 
-dist/MxTestProject/theme/*
-!dist/MxTestProject/theme/styles
-dist/MxTestProject/theme/styles/web/sass
-!dist/MxTestProject/theme/components.json
-!dist/MxTestProject/theme/favicon.ico
-!dist/MxTestProject/theme/index*
-!dist/MxTestProject/theme/LICENSE
-!dist/MxTestProject/theme/settings-native.json
-!dist/MxTestProject/theme/settings.json
-!dist/MxTestProject/theme/styles.js
+test/MxTestProject/theme/*
+!test/MxTestProject/theme/styles
+test/MxTestProject/theme/styles/web/sass
+!test/MxTestProject/theme/components.json
+!test/MxTestProject/theme/favicon.ico
+!test/MxTestProject/theme/index*
+!test/MxTestProject/theme/LICENSE
+!test/MxTestProject/theme/settings-native.json
+!test/MxTestProject/theme/settings.json
+!test/MxTestProject/theme/styles.js
