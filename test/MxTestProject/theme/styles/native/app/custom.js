@@ -1,1 +1,1 @@
-export * from "./groupbox";
+export * from "./group-box";

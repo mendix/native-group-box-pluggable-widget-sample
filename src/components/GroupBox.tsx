@@ -76,9 +76,8 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
             </View>
         );
 
-        const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
-
         if (collapsible) {
+            const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
             return <Touchable onPress={this.toggleCollapsed}>{view}</Touchable>;
         } else if (headerCaption) {
             return view;

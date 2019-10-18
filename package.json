@@ -22,9 +22,6 @@
         "prerelease": "npm run lint",
         "release": "pluggable-widgets-tools release:ts:native"
     },
-    "jest-junit": {
-        "output": "./dist/testresults/TESTS-Jest.xml"
-    },
     "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/mendix/native-group-box-sample/issues"
