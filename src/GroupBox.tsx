@@ -39,8 +39,8 @@ export class GroupBox extends Component<GroupBoxProps<CustomStyle>> {
         const props: WrappedGroupBoxProps = {
             collapsible: isCollapsible,
             headerCaption,
-            collapseIcon: this.renderIcon(collapseIcon, defaultCollapseIconGlyph),
-            expandIcon: this.renderIcon(expandIcon, defaultExpandIconGlyph),
+            collapseIcon: this.renderIcon(defaultCollapseIconGlyph, collapseIcon),
+            expandIcon: this.renderIcon(defaultExpandIconGlyph, expandIcon),
             style
         };
 
@@ -51,7 +51,7 @@ export class GroupBox extends Component<GroupBoxProps<CustomStyle>> {
         return <WrappedGroupBox {...props}>{content}</WrappedGroupBox>;
     }
 
-    private renderIcon = (toBeRenderedIcon: DynamicValue<NativeIcon> | undefined, glyph: string) => {
+    private renderIcon = (glyph: string, toBeRenderedIcon?: DynamicValue<NativeIcon>) => {
         const nativeIcon: NativeIcon =
             toBeRenderedIcon && toBeRenderedIcon.status === ValueStatus.Available
                 ? toBeRenderedIcon.value
