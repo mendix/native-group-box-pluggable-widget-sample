@@ -2,12 +2,12 @@
     "name": "groupbox",
     "widgetName": "GroupBox",
     "version": "1.0.0",
-    "description": "My widget description",
+    "description": "Widget to group building blocks, snippets or other widgets",
     "copyright": "Mendix 2019",
     "author": "Mendix",
     "config": {
-        "widgetPath": "./dist/MxTestProject/widgets",
-        "projectPath": "./dist/MxTestProject/"
+        "widgetPath": "./test/MxTestProject/widgets",
+        "projectPath": "./test/MxTestProject/"
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
@@ -21,9 +21,6 @@
         "test:unit": "pluggable-widgets-tools test:unit:native --coverage",
         "prerelease": "npm run lint",
         "release": "pluggable-widgets-tools release:ts:native"
-    },
-    "jest-junit": {
-        "output": "./dist/testresults/TESTS-Jest.xml"
     },
     "license": "Apache-2.0",
     "bugs": {
