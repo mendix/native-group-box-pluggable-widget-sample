@@ -1,11 +1,11 @@
 import { Children, Component, ReactNode, createElement, ComponentClass } from "react";
-import { Text, View, TouchableOpacity, Platform, TouchableNativeFeedback } from "react-native";
+import { Text, View, TouchableOpacity, Platform, TouchableNativeFeedback, TouchableWithoutFeedbackProps } from "react-native";
 
 import { CustomStyle } from "../GroupBox";
 import { flattenStyles } from "../utils/common";
 
 export interface GroupBoxProps {
-    startCollapsed?: boolean;
+    startCollapsed: boolean;
     collapsible: boolean;
     collapseIcon?: ReactNode;
     expandIcon?: ReactNode;
@@ -19,13 +19,13 @@ export interface GroupBoxState {
 
 const defaultStyle: CustomStyle = {
     container: {
-        borderColor: "#000",
+        borderColor: "#000000",
         borderRadius: Platform.OS === "ios" ? 4 : 0,
         borderWidth: 1,
         overflow: "hidden"
     },
     header: {
-        backgroundColor: "#000",
+        backgroundColor: "#000000",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -33,7 +33,7 @@ const defaultStyle: CustomStyle = {
         paddingHorizontal: 15
     },
     headerContent: {
-        color: "#FFF",
+        color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "bold"
     },
@@ -77,7 +77,7 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
         );
 
         if (collapsible) {
-            const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
+            const Touchable: ComponentClass<TouchableWithoutFeedbackProps> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
             return <Touchable onPress={this.toggleCollapsed}>{view}</Touchable>;
         } else if (headerCaption) {
             return view;

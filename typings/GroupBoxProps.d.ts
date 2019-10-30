@@ -4,6 +4,7 @@
  * @author Mendix Widgets Team
  */
 import { DynamicValue, NativeIcon } from "mendix";
+import { ReactNode } from "react";
 
 interface CommonProps<Style> {
     name: string;
@@ -13,7 +14,7 @@ interface CommonProps<Style> {
 export type CollapsibleEnum = "no" | "yesStartExpanded" | "yesStartCollapsed";
 
 export interface GroupBoxProps<Style> extends CommonProps<Style> {
-    content?: any;
+    content?: ReactNode;
     collapsible: CollapsibleEnum;
     headerCaption?: string;
     expandIcon?: DynamicValue<NativeIcon>;
