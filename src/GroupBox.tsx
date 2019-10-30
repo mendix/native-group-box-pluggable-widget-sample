@@ -19,7 +19,7 @@ const defaultStyle: CustomStyle = {
     container: {},
     header: {},
     headerContent: {
-        color: "#FFF",
+        color: "#FFFFFF",
         fontSize: 16
     },
     content: {}
@@ -37,16 +37,13 @@ export class GroupBox extends Component<GroupBoxProps<CustomStyle>> {
         const isCollapsible = collapsible !== "no";
 
         const props: WrappedGroupBoxProps = {
+            startCollapsed: collapsible === "yesStartCollapsed",
             collapsible: isCollapsible,
             headerCaption,
             collapseIcon: this.renderIcon(defaultCollapseIconGlyph, collapseIcon),
             expandIcon: this.renderIcon(defaultExpandIconGlyph, expandIcon),
             style
         };
-
-        if (collapsible) {
-            props.startCollapsed = collapsible === "yesStartCollapsed";
-        }
 
         return <WrappedGroupBox {...props}>{content}</WrappedGroupBox>;
     }

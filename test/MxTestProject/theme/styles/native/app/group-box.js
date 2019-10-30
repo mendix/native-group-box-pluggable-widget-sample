@@ -9,7 +9,7 @@ export const com_mendix_widget_native_groupbox_GroupBox = {
         backgroundColor: shadeblendconvert(0.4, brand.primary),
     },
     headerContent: {
-        color: "#000",
+        color: "#000000",
     },
 };
 
@@ -21,7 +21,7 @@ export const groupBoxSuccess = {
         backgroundColor: shadeblendconvert(0.4, brand.success),
     },
     headerContent: {
-        color: "#000",
+        color: "#000000",
     },
 };
 
@@ -33,7 +33,7 @@ export const groupBoxWarning = {
         backgroundColor: shadeblendconvert(0.4, brand.warning),
     },
     headerContent: {
-        color: "#000",
+        color: "#000000",
     },
 };
 
@@ -45,6 +45,6 @@ export const groupBoxDanger = {
         backgroundColor: shadeblendconvert(0.4, brand.danger),
     },
     headerContent: {
-        color: "#000",
+        color: "#000000",
     },
 };
