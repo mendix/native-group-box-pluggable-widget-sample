@@ -1,8 +1,9 @@
 import { Children, Component, ReactNode, createElement, ComponentClass } from "react";
-import { Text, View, TouchableOpacity, Platform, TouchableNativeFeedback } from "react-native";
+import { Text, View, Platform, TouchableOpacity, TouchableNativeFeedback } from "react-native";
+
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
 import { CustomStyle } from "../GroupBox";
-import { flattenStyles } from "../utils/common";
 
 export interface GroupBoxProps {
     startCollapsed?: boolean;
@@ -19,13 +20,13 @@ export interface GroupBoxState {
 
 const defaultStyle: CustomStyle = {
     container: {
-        borderColor: "#000",
+        borderColor: "#000000",
         borderRadius: Platform.OS === "ios" ? 4 : 0,
         borderWidth: 1,
         overflow: "hidden"
     },
     header: {
-        backgroundColor: "#000",
+        backgroundColor: "#000000",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
@@ -33,7 +34,7 @@ const defaultStyle: CustomStyle = {
         paddingHorizontal: 15
     },
     headerContent: {
-        color: "#FFF",
+        color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "bold"
     },
@@ -44,29 +45,30 @@ const defaultStyle: CustomStyle = {
 };
 
 export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
-    private readonly styles = flattenStyles(defaultStyle, this.props.style);
-
+    private readonly styles = mergeNativeStyles(defaultStyle, this.props.style);
     readonly state: GroupBoxState = {
         collapsed: !!this.props.startCollapsed
     };
 
-    render(): ReactNode {
-        const renderedHeader = this.renderHeader();
-        const renderedContent = this.renderContent();
+    private toggleCollapsed = (): void => {
+        this.setState(prevState => ({ collapsed: !prevState.collapsed }));
+    };
 
-        if (!renderedHeader && !renderedContent) {
+    private renderIcon = (): ReactNode => {
+        const { collapsible, collapseIcon, expandIcon } = this.props;
+
+        if (!collapsible) {
             return null;
         }
 
-        return (
-            <View style={this.styles.container}>
-                {renderedHeader}
-                {renderedContent}
-            </View>
-        );
-    }
+        if (this.state.collapsed) {
+            return expandIcon ? expandIcon : <Text style={this.styles.headerContent}>+</Text>;
+        }
 
-    private renderHeader = () => {
+        return collapseIcon ? collapseIcon : <Text style={this.styles.headerContent}>-</Text>;
+    };
+
+    private renderHeader = (): ReactNode => {
         const { collapsible, headerCaption } = this.props;
 
         const view = (
@@ -86,20 +88,6 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
         return null;
     };
 
-    private renderIcon = (): ReactNode => {
-        const { collapsible, collapseIcon, expandIcon } = this.props;
-
-        if (!collapsible) {
-            return null;
-        }
-
-        if (this.state.collapsed) {
-            return expandIcon ? expandIcon : <Text style={this.styles.headerContent}>+</Text>;
-        }
-
-        return collapseIcon ? collapseIcon : <Text style={this.styles.headerContent}>-</Text>;
-    };
-
     private renderContent = (): ReactNode => {
         if (this.state.collapsed || Children.count(this.props.children) === 0) {
             return null;
@@ -108,8 +96,19 @@ export class GroupBox extends Component<GroupBoxProps, GroupBoxState> {
         return <View style={this.styles.content}>{this.props.children}</View>;
     };
 
-    private toggleCollapsed = (): void => {
-        const collapsed = !this.state.collapsed;
-        this.setState({ collapsed });
-    };
+    render(): ReactNode {
+        const renderedHeader = this.renderHeader();
+        const renderedContent = this.renderContent();
+
+        if (!renderedHeader && !renderedContent) {
+            return null;
+        }
+
+        return (
+            <View style={this.styles.container}>
+                {renderedHeader}
+                {renderedContent}
+            </View>
+        );
+    }
 }
